@@ -1,0 +1,151 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+
+const configEntry = await getEntry('configuracoes', 'loja');
+const loja = configEntry?.data ?? {
+  nomeLoja: 'Metal DP',
+  slogan: 'Serralheria artística sob medida em Dom Pedro - MA. Solda MMA reforçada e pintura profissional a compressor.',
+  telefone: '(99) 9175-6968',
+  whatsapp: '559991756968',
+  endereco: 'Dom Pedro - MA',
+  cidadeBairro: 'Dom Pedro, MA - CEP 65765-000',
+};
+---
+
+<BaseLayout
+  title={`Sobre Nós - ${loja.nomeLoja} | Serralheria Artística`}
+  description="Conheça a história e o trabalho da Metal DP. Serralheria artística sob medida com solda MMA reforçada e pintura automotiva no compressor em Dom Pedro - MA."
+>
+  <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-8 sm:py-16 overflow-hidden">
+    
+    <!-- Hero da página Sobre -->
+    <div class="max-w-3xl mx-auto text-center mb-10 sm:mb-16">
+      <span class="text-[11px] sm:text-xs uppercase font-extrabold tracking-wider text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-950/70 border border-blue-300 dark:border-blue-800 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full inline-block mb-3">
+        Nossa Essência & Dedicação
+      </span>
+      <h1 class="text-2xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+        A Arte do Metal Moldada com Força e Precisão
+      </h1>
+      <p class="mt-3 sm:mt-4 text-xs sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+        Nascemos em Dom Pedro - MA da dedicação pelo artesanato em metal e estruturas sob medida. Criamos portões, corrimãos, grades e móveis industriais que unem segurança, robustez e acabamento impecável.
+      </p>
+    </div>
+
+    <!-- Imagem em Destaque e História -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-20">
+      <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-blue-950">
+        <img
+          src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=800&q=80"
+          alt="Oficina da Metal DP - Serralheria Artística em Dom Pedro - MA"
+          class="w-full h-64 sm:h-[460px] object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent"></div>
+        <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 text-white">
+          <span class="text-[10px] sm:text-xs uppercase tracking-wider font-extrabold text-cyan-400">Serralheria Sob Medida & Design Autêntico</span>
+          <h3 class="text-lg sm:text-xl font-black mt-1">Feito à mão, com solda MMA e pintura no compressor</h3>
+        </div>
+      </div>
+
+      <div class="space-y-4 sm:space-y-6 text-slate-600 dark:text-slate-300 leading-relaxed text-xs sm:text-base">
+        <h2 class="text-xl sm:text-3xl font-black text-slate-900 dark:text-white leading-snug">
+          Onde a força do metal ganha vida e personalidade
+        </h2>
+        <p>
+          A <strong>{loja.nomeLoja}</strong> nasceu para valorizar o verdadeiro trabalho da serralheria artística e artesanal. Longe das peças frágeis e padronizadas do mercado em massa, acreditamos na atenção a cada detalhe: corte no esquadro, dobramento preciso a frio e soldagem robusta.
+        </p>
+        <p>
+          Nosso processo de união é realizado com <strong>solda MMA (eletrodo revestido)</strong>, reconhecida pela fusão profunda e extrema resistência mecânica. Isso garante que cada portão, corrimão, grade ou estrutura suporte esforços contínuos e o peso dos anos sem trincar ou desalinhar.
+        </p>
+        <p>
+          Para o acabamento, realizamos preparação minuciosa com desbaste de solda, aplicação de primer antiferrugem anticorrosivo de alta aderência e <strong>pintura com compressor profissional</strong>. É o mesmo padrão de acabamento automotivo, com pulverização uniforme que protege o aço contra a ação da chuva, da umidade e do sol forte do Maranhão.
+        </p>
+      </div>
+    </div>
+
+    <!-- Números e Indicadores em Tons de Azul -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mb-12 sm:mb-20">
+      <div class="bg-white dark:bg-[#0c1527] p-4 sm:p-6 rounded-2xl border border-slate-200 dark:border-blue-950 text-center shadow-card">
+        <span class="block text-xl sm:text-3xl font-black text-blue-600 dark:text-blue-400">Solda MMA</span>
+        <span class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-1 block">Eletrodo Revestido</span>
+      </div>
+      <div class="bg-white dark:bg-[#0c1527] p-4 sm:p-6 rounded-2xl border border-slate-200 dark:border-blue-950 text-center shadow-card">
+        <span class="block text-xl sm:text-3xl font-black text-blue-600 dark:text-blue-400">100%</span>
+        <span class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-1 block">Sob Medida</span>
+      </div>
+      <div class="bg-white dark:bg-[#0c1527] p-4 sm:p-6 rounded-2xl border border-slate-200 dark:border-blue-950 text-center shadow-card">
+        <span class="block text-xl sm:text-3xl font-black text-blue-600 dark:text-blue-400">Compressor</span>
+        <span class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-1 block">Pintura Automotiva</span>
+      </div>
+      <div class="bg-white dark:bg-[#0c1527] p-4 sm:p-6 rounded-2xl border border-slate-200 dark:border-blue-950 text-center shadow-card">
+        <span class="block text-xl sm:text-3xl font-black text-blue-600 dark:text-blue-400">Dom Pedro</span>
+        <span class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-1 block">Maranhão</span>
+      </div>
+    </div>
+
+    <!-- Nossos Pilares e Valores -->
+    <div class="bg-white dark:bg-[#0c1527] rounded-2xl sm:rounded-3xl border border-slate-200/90 dark:border-blue-950 shadow-card p-5 sm:p-12 mb-10 sm:mb-16">
+      <div class="text-center max-w-xl mx-auto mb-8 sm:mb-10">
+        <h2 class="text-xl sm:text-3xl font-black text-slate-900 dark:text-white">Nossos Pilares Fundamentais</h2>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-2">O compromisso que guia cada corte, solda e pintura em nossa oficina.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-8">
+        <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-blue-950">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 flex items-center justify-center text-xl sm:text-2xl mb-3 sm:mb-4">
+            ⚡
+          </div>
+          <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-1.5 sm:mb-2">Solda MMA Reforçada</h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            Soldagem com eletrodo revestido garantindo penetração total no aço e uniões ultra resistentes que não quebram nem trincam.
+          </p>
+        </div>
+
+        <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-blue-950">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 flex items-center justify-center text-xl sm:text-2xl mb-3 sm:mb-4">
+            🛡️
+          </div>
+          <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-1.5 sm:mb-2">Pintura no Compressor</h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            Acabamento de padrão automotivo com pistola de pulverização, primer antiferrugem e camadas lisas e resistentes a intempéries.
+          </p>
+        </div>
+
+        <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-blue-950">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 flex items-center justify-center text-xl sm:text-2xl mb-3 sm:mb-4">
+            📐
+          </div>
+          <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-1.5 sm:mb-2">Precisão Sob Medida</h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            Cada trabalho é dimensionado exatamente para o espaço do cliente, respeitando níveis, prumos e detalhes estéticos solicitados.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chamada para Ação -->
+    <div class="bg-gradient-to-r from-slate-950 via-blue-950 to-slate-900 border border-blue-900/60 rounded-2xl sm:rounded-3xl p-6 sm:p-12 text-white text-center shadow-xl">
+      <h2 class="text-xl sm:text-4xl font-black mb-2 sm:mb-3">Tem um projeto ou ideia em mente?</h2>
+      <p class="text-slate-300 text-xs sm:text-base max-w-xl mx-auto mb-5 sm:mb-6">
+        Envie sua foto de referência, medidas ou solicite uma estimativa de orçamento pelo WhatsApp da Metal DP.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-3">
+        <a
+          href="/localizacao"
+          class="px-5 py-3 sm:px-6 sm:py-3.5 bg-slate-900 text-white font-bold text-xs sm:text-sm rounded-xl hover:bg-slate-800 border border-blue-800/60 transition text-center"
+        >
+          Onde Fica Nossa Oficina
+        </a>
+        <a
+          href={`https://wa.me/${loja.whatsapp}?text=${encodeURIComponent('Olá! Gostaria de conversar com a Metal DP sobre um orçamento para o meu projeto.')}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-5 py-3 sm:px-6 sm:py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-black text-xs sm:text-sm rounded-xl transition shadow-lg shadow-blue-600/30 text-center"
+        >
+          Conversar no WhatsApp
+        </a>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>

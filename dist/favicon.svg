@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="50%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Fundo azul meia-noite arredondado -->
+  <rect width="100" height="100" rx="24" fill="url(#blueGrad)"/>
+
+  <!-- Borda sutil de aço azul -->
+  <rect x="2" y="2" width="96" height="96" rx="22" fill="none" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.4"/>
+
+  <!-- Bigorna de Serralheria & Forja Artística em Metal Cromado/Azul -->
+  <g transform="translate(18, 22)">
+    <!-- Chifre e corpo da bigorna -->
+    <path d="M4 14 C12 14, 16 12, 19 8 L54 8 C57 8, 59 10, 59 13 L56 22 C51 22, 47 25, 45 30 L43 38 L55 42 L55 47 L9 47 L9 42 L21 38 L19 30 C17 25, 13 22, 4 22 Z"
+          fill="url(#metalGrad)" />
+    
+    <!-- Base reforçada da bigorna -->
+    <path d="M7 47 L57 47 C59 47, 61 49, 61 51 L63 56 L1 56 L3 51 C3 49, 5 47, 7 47 Z"
+          fill="#93c5fd" />
+
+    <!-- Martelo / Faíscas de forjamento -->
+    <circle cx="56" cy="14" r="3.5" fill="#38bdf8" filter="url(#glow)"/>
+    <path d="M52 4 L57 9" stroke="#67e8f9" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M60 5 L63 2" stroke="#67e8f9" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>

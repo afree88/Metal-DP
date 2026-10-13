@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+
+const configEntry = await getEntry('configuracoes', 'loja');
+const loja = configEntry?.data ?? {
+  nomeLoja: 'Metal DP',
+  telefone: '(99) 9175-6968',
+  whatsapp: '559991756968',
+  endereco: 'Dom Pedro - MA',
+  cidadeBairro: 'Dom Pedro, MA - CEP 65765-000',
+  horarioSemana: 'Segunda a Sexta: 07h30 às 18h00 | Sábado: 08h00 às 12h00',
+  horarioDomingo: 'Atendimento online via WhatsApp',
+  googleMapsUrl: 'https://maps.app.goo.gl/23J3PhaQqDWC6AuA9',
+  googleMapsEmbed: 'https://maps.google.com/maps?q=-5.024754,-44.439429&hl=pt-BR&z=16&output=embed',
+};
+---
+
+<BaseLayout
+  title={`Onde Estamos & Localização - ${loja.nomeLoja} | Serralheria Artística`}
+  description={`Visite nossa oficina de serralheria artística em Dom Pedro - MA. Veja no mapa, rotas e solicite um orçamento sob medida.`}
+>
+  <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-8 sm:py-16 overflow-hidden">
+    
+    <!-- Cabeçalho -->
+    <div class="max-w-3xl mb-8 sm:mb-12">
+      <span class="text-[11px] sm:text-xs uppercase font-extrabold tracking-wider text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-950/70 border border-blue-300 dark:border-blue-800 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full inline-block mb-3">
+        Venha Conhecer a Oficina
+      </span>
+      <h1 class="text-2xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+        Localização da Oficina & Serralheria
+      </h1>
+      <p class="mt-2 sm:mt-3 text-slate-600 dark:text-slate-400 text-xs sm:text-base">
+        Estamos localizados em Dom Pedro - Maranhão. Venha ver amostras de peças, acabamentos e planejar seu projeto sob medida conosco.
+      </p>
+    </div>
+
+    <!-- Container do Mapa do Google Maps -->
+    <div class="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 border-blue-500/30 mb-8 sm:mb-12 bg-slate-100 dark:bg-[#0c1527] aspect-[16/10] sm:aspect-[16/9] max-h-[500px]">
+      <iframe
+        src={loja.googleMapsEmbed}
+        width="100%"
+        height="100%"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title={`Mapa de localização de ${loja.nomeLoja}`}
+        class="w-full h-full"
+      ></iframe>
+    </div>
+
+    <!-- Informações de Rota, Atendimento e Horários -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
+      
+      <!-- Card 1: Endereço & Trajeto -->
+      <div class="bg-white dark:bg-[#0c1527] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200/90 dark:border-blue-950 shadow-card flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl sm:text-2xl mb-3 sm:mb-4 border border-blue-200 dark:border-blue-800">
+            📍
+          </div>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white mb-2">Endereço da Oficina</h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+            {loja.endereco}<br />
+            {loja.cidadeBairro}
+          </p>
+          <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-2">
+            Ponto de fácil acesso em Dom Pedro - MA para recepção de clientes e entrega de projetos.
+          </p>
+        </div>
+
+        <div class="mt-4 sm:mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-2">
+          <a
+            href={loja.googleMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-sm text-center"
+          >
+            <span>Abrir no Google Maps & Traçar Rota</span>
+            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2: Região de Atendimento & Instalação -->
+      <div class="bg-white dark:bg-[#0c1527] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200/90 dark:border-blue-950 shadow-card">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl sm:text-2xl mb-3 sm:mb-4 border border-blue-200 dark:border-blue-800">
+          🚚
+        </div>
+        <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white mb-2">Atendimento Regional</h3>
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-3 sm:mb-4">
+          Atendemos residências, fazendas, sítios, comércios e obras em Dom Pedro e em municípios vizinhos do Maranhão.
+        </p>
+        <ul class="space-y-1.5 sm:space-y-2 text-xs text-slate-600 dark:text-slate-400">
+          <li class="flex items-center gap-2">
+            <span class="text-blue-600 dark:text-blue-400 font-bold">✓</span>
+            <span>Visita técnica para medição sob medida</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-blue-600 dark:text-blue-400 font-bold">✓</span>
+            <span>Transporte seguro e protegido das peças</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-blue-600 dark:text-blue-400 font-bold">✓</span>
+            <span>Instalação firme e nivelada no local</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card 3: Horários & Contato Direto -->
+      <div class="bg-white dark:bg-[#0c1527] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200/90 dark:border-blue-950 shadow-card flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl sm:text-2xl mb-3 sm:mb-4 border border-blue-200 dark:border-blue-800">
+            ⏰
+          </div>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white mb-2">Horários de Atendimento</h3>
+          <div class="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+            <div>
+              <strong class="block text-slate-900 dark:text-white text-xs">Segunda a Sexta:</strong>
+              <span>07h30 às 18h00</span>
+            </div>
+            <div>
+              <strong class="block text-slate-900 dark:text-white text-xs">Sábados:</strong>
+              <span>08h00 às 12h00</span>
+            </div>
+            <div>
+              <strong class="block text-slate-900 dark:text-white text-xs">Domingos e Feriados:</strong>
+              <span>Atendimento via WhatsApp</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 sm:mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+          <a
+            href={`https://wa.me/${loja.whatsapp}?text=${encodeURIComponent('Olá! Gostaria de tirar dúvidas ou solicitar orçamento na Metal DP.')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition text-center"
+          >
+            <span>Falar no WhatsApp: {loja.telefone}</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</BaseLayout>

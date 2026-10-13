@@ -1,0 +1,168 @@
+{
+  "$ref": "#/definitions/configuracoes",
+  "definitions": {
+    "configuracoes": {
+      "type": "object",
+      "properties": {
+        "nomeLoja": {
+          "type": "string",
+          "default": "Metal DP"
+        },
+        "slogan": {
+          "type": "string",
+          "default": "Serralheria artística sob medida em Dom Pedro - MA. Solda MMA reforçada e pintura profissional a compressor."
+        },
+        "telefone": {
+          "type": "string"
+        },
+        "whatsapp": {
+          "type": "string"
+        },
+        "endereco": {
+          "type": "string"
+        },
+        "cidadeBairro": {
+          "type": "string"
+        },
+        "googleMapsUrl": {
+          "type": "string"
+        },
+        "googleMapsEmbed": {
+          "type": "string"
+        },
+        "horarioSemana": {
+          "type": "string"
+        },
+        "horarioDomingo": {
+          "type": "string"
+        },
+        "bannerAviso": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "not": {}
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "bannerTitulo": {
+          "type": "string"
+        },
+        "bannerSubtitulo": {
+          "type": "string"
+        },
+        "aceitaPix": {
+          "type": "boolean",
+          "default": true
+        },
+        "chavePix": {
+          "type": "string",
+          "default": "559991756968"
+        },
+        "tipoChavePix": {
+          "type": "string",
+          "default": "Celular / WhatsApp"
+        },
+        "titularPix": {
+          "type": "string",
+          "default": "Metal DP Serralheria Artística"
+        },
+        "aceitaDinheiro": {
+          "type": "boolean",
+          "default": true
+        },
+        "obsDinheiro": {
+          "type": "string",
+          "default": "Dinheiro à vista na entrega ou retirada"
+        },
+        "aceitaCartao": {
+          "type": "boolean",
+          "default": false
+        },
+        "obsCartao": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "not": {}
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": "Cartão de Débito / Crédito"
+        },
+        "aceitaBitcoinLightning": {
+          "type": "boolean",
+          "default": true
+        },
+        "enderecoLightning": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "not": {}
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": "talison@walletofsatoshi.com"
+        },
+        "obsBitcoinLightning": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "not": {}
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": "Pagamento instantâneo via Lightning Network (BTC)"
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "telefone",
+        "whatsapp",
+        "endereco",
+        "cidadeBairro",
+        "googleMapsUrl",
+        "googleMapsEmbed",
+        "horarioSemana",
+        "horarioDomingo",
+        "bannerTitulo",
+        "bannerSubtitulo"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

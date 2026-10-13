@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import CategoryChips from '../../components/CategoryChips.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+const configEntry = await getEntry('configuracoes', 'loja');
+const loja = configEntry?.data ?? {
+  nomeLoja: 'Metal DP',
+  whatsapp: '559991756968',
+};
+
+const todosProdutos = await getCollection('produtos');
+
+// Categorias disponíveis
+const categorias = [
+  'Portões e Grades',
+  'Guarda-Corpos e Corrimãos',
+  'Móveis e Mesas',
+  'Luminárias e Arandelas',
+  'Esculturas e Painéis',
+  'Pergolados e Gazebos',
+  'Adegas e Suportes'
+];
+
+// Pega parâmetros de URL se passados no servidor
+const categoriaUrl = Astro.url.searchParams.get('categoria') || '';
+const buscaUrl = Astro.url.searchParams.get('busca') || '';
+---
+
+<BaseLayout
+  title={`Galeria de Peças & Catálogo - ${loja.nomeLoja}`}
+  description="Consulte nossa galeria completa de peças sob medida, portões, corrimãos, mesas industriais, pergolados e estruturas em ferro da Metal DP em Dom Pedro - MA."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    
+    <!-- Cabeçalho da Página de Produtos -->
+    <div class="mb-8">
+      <nav class="flex items-center text-xs text-slate-500 dark:text-slate-400 mb-2 gap-1.5">
+        <a href="/" class="hover:text-blue-600 dark:hover:text-blue-400">Início</a>
+        <span>&bull;</span>
+        <span class="text-slate-800 dark:text-slate-200 font-semibold">Galeria de Peças & Obras</span>
+      </nav>
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+            Catálogo & Galeria de Peças
+          </h1>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+            Explore modelos exclusivos, consulte valores de referência e monte sua lista de orçamento para envio direto pelo WhatsApp.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-semibold text-slate-600 dark:text-slate-300 bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-blue-950 px-3.5 py-1.5 rounded-full shadow-sm">
+            Total de <strong class="text-blue-600 dark:text-blue-400 font-bold" id="total-count">{todosProdutos.length}</strong> peças disponíveis
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra de Filtros e Busca Rápida -->
+    <div class="bg-white dark:bg-[#0c1527] p-3.5 sm:p-6 rounded-2xl sm:rounded-3xl border border-slate-200/90 dark:border-blue-950 shadow-sm mb-6 sm:mb-8 space-y-3 sm:space-y-4">
+      
+      <!-- Input de busca interativa em tempo real -->
+      <div class="flex flex-col sm:flex-row gap-2.5 sm:gap-3">
+        <div class="relative flex-1">
+          <input
+            type="text"
+            id="filtro-busca"
+            value={buscaUrl}
+            placeholder="Buscar por nome (ex: portão, corrimão, pergolado, lustre)..."
+            class="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-blue-950 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          />
+          <div class="absolute inset-y-0 left-0 pl-3 sm:pl-3.5 flex items-center pointer-events-none text-slate-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Seletor de Ordenação -->
+        <div class="sm:w-56 shrink-0">
+          <select
+            id="filtro-ordenacao"
+            class="w-full px-3 py-2 sm:py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-blue-950 rounded-xl text-xs sm:text-sm focus:bg-white dark:focus:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-700 dark:text-slate-200 font-medium"
+          >
+            <option value="padrao">Ordenar: Destaques da Oficina</option>
+            <option value="menor-preco">Valor: Menor para Maior</option>
+            <option value="maior-preco">Valor: Maior para Menor</option>
+            <option value="nome">Nome Alfabético (A-Z)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Chips de categorias na página de catálogo -->
+      <div class="pt-2 border-t border-slate-100 dark:border-blue-950">
+        <CategoryChips activeCategory={categoriaUrl} baseUrl="/produtos" />
+      </div>
+    </div>
+
+    <!-- Grid de Produtos Interativo -->
+    <div
+      id="produtos-grid"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 min-h-[300px]"
+    >
+      {todosProdutos.map((prod) => (
+        <div
+          class="produto-item-wrapper"
+          data-nome={prod.data.nome.toLowerCase()}
+          data-categoria={prod.data.categoria.toLowerCase()}
+          data-preco={prod.data.precoPromocional ?? prod.data.preco}
+          data-destaque={prod.data.destaque ? '1' : '0'}
+        >
+          <ProductCard
+            slug={prod.slug}
+            nome={prod.data.nome}
+            preco={prod.data.preco}
+            precoPromocional={prod.data.precoPromocional}
+            unidade={prod.data.unidade}
+            categoria={prod.data.categoria}
+            descricao={prod.data.descricao}
+            imagem={prod.data.imagem}
+            disponivel={prod.data.disponivel}
+            destaque={prod.data.destaque}
+            whatsapp={loja.whatsapp}
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- Feedback caso nenhum produto corresponda aos filtros -->
+    <div
+      id="nenhum-produto-encontrado"
+      class="hidden py-16 text-center max-w-md mx-auto"
+    >
+      <div class="w-16 h-16 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-500 flex items-center justify-center text-3xl mx-auto mb-4 border border-blue-200 dark:border-blue-900">
+        🔍
+      </div>
+      <h3 class="text-lg font-bold text-slate-900 dark:text-white">Nenhuma peça encontrada</h3>
+      <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-6">
+        Não encontramos peças com os termos pesquisados. Produzimos qualquer modelo sob medida!
+      </p>
+      <a
+        href={`https://wa.me/${loja.whatsapp}?text=${encodeURIComponent('Olá! Tenho uma foto de referência de uma peça em ferro que gostaria de orçar sob medida.')}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition"
+      >
+        Pedir Projeto Personalizado no WhatsApp
+      </a>
+    </div>
+
+  </div>
+</BaseLayout>
+
+<script>
+  // Filtro interativo em tempo real (Cliente)
+  const inputBusca = document.getElementById('filtro-busca') as HTMLInputElement | null;
+  const selectOrdenacao = document.getElementById('filtro-ordenacao') as HTMLSelectElement | null;
+  const grid = document.getElementById('produtos-grid');
+  const emptyState = document.getElementById('nenhum-produto-encontrado');
+  const countBadge = document.getElementById('total-count');
+
+  const itens = Array.from(document.querySelectorAll('.produto-item-wrapper')) as HTMLElement[];
+
+  const params = new URLSearchParams(window.location.search);
+  const categoriaFiltro = (params.get('categoria') || '').toLowerCase();
+
+  function aplicarFiltros() {
+    const termo = (inputBusca?.value || '').toLowerCase().trim();
+    let visiveis = 0;
+
+    itens.forEach((el) => {
+      const nome = el.getAttribute('data-nome') || '';
+      const categoria = el.getAttribute('data-categoria') || '';
+
+      const matchNome = !termo || nome.includes(termo) || categoria.includes(termo);
+      const matchCategoria = !categoriaFiltro || categoria === categoriaFiltro;
+
+      if (matchNome && matchCategoria) {
+        el.style.display = '';
+        visiveis++;
+      } else {
+        el.style.display = 'none';
+      }
+    });
+
+    if (countBadge) {
+      countBadge.textContent = String(visiveis);
+    }
+
+    if (visiveis === 0) {
+      emptyState?.classList.remove('hidden');
+    } else {
+      emptyState?.classList.add('hidden');
+    }
+
+    ordenarItens();
+  }
+
+  function ordenarItens() {
+    if (!grid || !selectOrdenacao) return;
+    const criterio = selectOrdenacao.value;
+
+    const itensOrdenados = [...itens].sort((a, b) => {
+      const precoA = parseFloat(a.getAttribute('data-preco') || '0');
+      const precoB = parseFloat(b.getAttribute('data-preco') || '0');
+      const nomeA = a.getAttribute('data-nome') || '';
+      const nomeB = b.getAttribute('data-nome') || '';
+      const destaqueA = a.getAttribute('data-destaque') === '1' ? 1 : 0;
+      const destaqueB = b.getAttribute('data-destaque') === '1' ? 1 : 0;
+
+      if (criterio === 'menor-preco') return precoA - precoB;
+      if (criterio === 'maior-preco') return precoB - precoA;
+      if (criterio === 'nome') return nomeA.localeCompare(nomeB);
+      return destaqueB - destaqueA;
+    });
+
+    itensOrdenados.forEach((item) => grid.appendChild(item));
+  }
+
+  inputBusca?.addEventListener('input', aplicarFiltros);
+  selectOrdenacao?.addEventListener('change', ordenarItens);
+
+  aplicarFiltros();
+</script>

@@ -1,0 +1,197 @@
+---
+interface Props {
+  loja: {
+    nomeLoja: string;
+    slogan?: string;
+    endereco: string;
+    cidadeBairro: string;
+    telefone: string;
+    whatsapp: string;
+    horarioSemana: string;
+    horarioDomingo: string;
+    aceitaPix?: boolean;
+    aceitaDinheiro?: boolean;
+    aceitaCartao?: boolean;
+    aceitaBitcoinLightning?: boolean;
+  };
+}
+
+const { loja } = Astro.props;
+const currentYear = new Date().getFullYear();
+
+const aceitaPix = loja.aceitaPix !== false;
+const aceitaDinheiro = loja.aceitaDinheiro !== false;
+const aceitaCartao = loja.aceitaCartao === true;
+const aceitaLightning = loja.aceitaBitcoinLightning === true;
+
+const categorias = [
+  'Portões e Grades',
+  'Guarda-Corpos e Corrimãos',
+  'Móveis e Mesas',
+  'Luminárias e Arandelas',
+  'Esculturas e Painéis',
+  'Pergolados e Gazebos',
+  'Adegas e Suportes'
+];
+---
+
+<footer class="bg-[#050812] text-slate-300 pt-10 sm:pt-14 pb-8 border-t border-blue-950 overflow-hidden w-full max-w-full">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 pb-10 sm:pb-12 border-b border-blue-950/80">
+      
+      <!-- Coluna 1: Sobre a Serralheria Artística -->
+      <div>
+        <div class="flex items-center gap-2.5 mb-4">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center text-white font-bold">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M19 7h-1V5a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2H5a3 3 0 0 0-3 3v2a1 1 0 0 0 1 1h1.1a5.98 5.98 0 0 0 4.9 2.9V18H7a1 1 0 0 0-1 1v1h12v-1a1 1 0 0 0-1-1h-2v-2.1a5.98 5.98 0 0 0 4.9-2.9H21a1 1 0 0 0 1-1v-2a3 3 0 0 0-3-3z"/>
+            </svg>
+          </div>
+          <span class="text-xl font-black text-white tracking-tight">Metal <span class="text-blue-500">DP</span></span>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-400 mb-4 sm:mb-5 leading-relaxed">
+          {loja.slogan || 'Serralheria artística sob medida em Dom Pedro - MA. Solda MMA reforçada e pintura profissional no compressor.'}
+        </p>
+        <div class="space-y-1.5 sm:space-y-2 text-xs text-slate-400">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>
+            <span>Solda MMA reforçada e durabilidade estrutural</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>
+            <span>Pintura automotiva com compressor profissional</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>
+            <span>Projetos e peças sob medida</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna 2: Categorias Principais -->
+      <div>
+        <h3 class="text-white font-bold text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4">Especialidades da Serralheria</h3>
+        <ul class="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
+          {categorias.slice(0, 6).map((cat) => (
+            <li>
+              <a
+                href={`/produtos?categoria=${encodeURIComponent(cat)}`}
+                class="hover:text-blue-400 transition-colors inline-block"
+              >
+                {cat}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a href="/produtos" class="text-blue-400 hover:text-blue-300 font-bold inline-flex items-center gap-1 mt-1 text-xs">
+              Ver todas as peças &rarr;
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Coluna 3: Horários e Atendimento -->
+      <div>
+        <h3 class="text-white font-bold text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4">Atendimento & Oficina</h3>
+        <ul class="space-y-2 sm:space-y-3 text-xs sm:text-sm text-slate-300">
+          <li class="flex items-start gap-2">
+            <svg class="w-4 h-4 text-blue-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <div>
+              <strong class="block text-white font-medium text-xs">Segunda a Sexta</strong>
+              <span class="text-slate-400 text-xs">{loja.horarioSemana}</span>
+            </div>
+          </li>
+          <li class="flex items-start gap-2">
+            <svg class="w-4 h-4 text-blue-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <div>
+              <strong class="block text-white font-medium text-xs">Sábados</strong>
+              <span class="text-slate-400 text-xs">08h00 às 12h00</span>
+            </div>
+          </li>
+          <li class="flex items-start gap-2">
+            <svg class="w-4 h-4 text-blue-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <div>
+              <strong class="block text-white font-medium text-xs">Domingos e Feriados</strong>
+              <span class="text-slate-400 text-xs">{loja.horarioDomingo}</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="mt-4 sm:mt-5">
+          <h4 class="text-[11px] sm:text-xs uppercase text-slate-400 font-bold mb-2">Pagamentos Aceitos</h4>
+          <div class="flex flex-wrap gap-1.5 sm:gap-2 text-[11px] text-slate-300">
+            {aceitaPix && (
+              <span class="bg-slate-900 px-2 py-1 rounded border border-blue-950 flex items-center gap-1">
+                <span>💠</span> PIX
+              </span>
+            )}
+            {aceitaDinheiro && (
+              <span class="bg-slate-900 px-2 py-1 rounded border border-blue-950 flex items-center gap-1">
+                <span>💵</span> Dinheiro
+              </span>
+            )}
+            {aceitaLightning && (
+              <span class="bg-slate-900 px-2 py-1 rounded border border-amber-900/50 flex items-center gap-1 text-amber-300">
+                ⚡ BTC Lightning
+              </span>
+            )}
+            {aceitaCartao && (
+              <span class="bg-slate-900 px-2 py-1 rounded border border-blue-950 flex items-center gap-1">
+                <span>💳</span> Cartão
+              </span>
+            )}
+            {!aceitaCartao && (
+              <span class="bg-slate-900/50 px-2 py-0.5 rounded border border-slate-800 text-slate-500 text-[10px] italic">
+                Sem cartão
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna 4: Onde Estamos & Contato -->
+      <div>
+        <h3 class="text-white font-bold text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4">Localização & Contato</h3>
+        <p class="text-xs sm:text-sm text-slate-300 mb-2 leading-relaxed">
+          {loja.endereco}<br />
+          {loja.cidadeBairro}
+        </p>
+        <p class="text-xs sm:text-sm text-slate-300 mb-4">
+          Telefone / WhatsApp: <strong class="text-white">{loja.telefone}</strong>
+        </p>
+
+        <a
+          href="/localizacao"
+          class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-400 hover:text-blue-300 underline underline-offset-4"
+        >
+          <span>📍</span> Ver rota e mapa no Google Maps
+        </a>
+
+        <div class="mt-4 sm:mt-6">
+          <a
+            href={`https://wa.me/${loja.whatsapp}?text=${encodeURIComponent('Olá! Gostaria de falar com a serralheria Metal DP.')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow w-full sm:w-auto"
+          >
+            <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            <span>WhatsApp da Serralheria</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Barra de Direitos Autorais -->
+    <div class="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3 text-center sm:text-left">
+      <p>&copy; {currentYear} Metal DP - Serralheria Artística sob Medida. Todos os direitos reservados.</p>
+      <div class="flex items-center gap-4 text-slate-400">
+        <a href="/sobre" class="hover:underline">Sobre a Empresa</a>
+        <span>&bull;</span>
+        <a href="/localizacao" class="hover:underline">Localização</a>
+        <span>&bull;</span>
+        <a href="/contato" class="hover:underline">Orçamento</a>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,311 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PromoBanner from '../components/PromoBanner.astro';
+import ProductCard from '../components/ProductCard.astro';
+import CategoryChips from '../components/CategoryChips.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+// Busca dados da loja
+const configEntry = await getEntry('configuracoes', 'loja');
+const loja = configEntry?.data ?? {
+  nomeLoja: 'Metal DP',
+  slogan: 'Serralheria artística sob medida em Dom Pedro - MA. Solda MMA reforçada e acabamento automotivo a compressor.',
+  telefone: '(99) 9175-6968',
+  whatsapp: '559991756968',
+  endereco: 'Dom Pedro - MA',
+  cidadeBairro: 'Dom Pedro, MA - CEP 65765-000',
+  horarioSemana: '07h30 às 18h00',
+  horarioDomingo: 'Atendimento e orçamentos online pelo WhatsApp',
+  bannerTitulo: 'Serralheria Artística com Força, Elegância e Precisão',
+  bannerSubtitulo: 'Portões coloniais, corrimãos ornamentais, móveis industriais e estruturas personalizadas com solda MMA reforçada.',
+  chavePix: '559991756968',
+  tipoChavePix: 'Celular / WhatsApp',
+  titularPix: 'Metal DP Serralheria Artística',
+};
+
+// Busca todos os produtos
+const todosProdutos = await getCollection('produtos');
+
+// Filtra produtos em promoção
+const produtosEmPromocao = todosProdutos.filter(
+  (p) => p.data.precoPromocional && p.data.precoPromocional < p.data.preco && p.data.disponivel
+);
+
+// Filtra produtos em destaque
+const produtosDestaque = todosProdutos.filter((p) => p.data.destaque && p.data.disponivel);
+
+// Categorias com imagens de capa para a seção visual
+const categoriasCards = [
+  {
+    nome: 'Portões e Grades',
+    desc: 'Volutas decorativas e barras reforçadas',
+    img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80',
+  },
+  {
+    nome: 'Guarda-Corpos e Corrimãos',
+    desc: 'Escadas curvas e sacadas nobres',
+    img: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80',
+  },
+  {
+    nome: 'Móveis e Mesas',
+    desc: 'Design industrial e rústico em ferro maciço',
+    img: 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=600&q=80',
+  },
+  {
+    nome: 'Luminárias e Arandelas',
+    desc: 'Lustres medievais e arandelas artísticas',
+    img: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=600&q=80',
+  },
+  {
+    nome: 'Esculturas e Painéis',
+    desc: 'Arte vazada e painéis paramétricos',
+    img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80',
+  },
+  {
+    nome: 'Pergolados e Gazebos',
+    desc: 'Estruturas imponentes para áreas externas',
+    img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80',
+  },
+];
+---
+
+<BaseLayout
+  title={`${loja.nomeLoja} - Serralheria Artística Sob Medida | Dom Pedro - MA`}
+  description={loja.slogan}
+>
+  <!-- 1. Banner Principal com Efeito de Faíscas Azuis da Oficina -->
+  <PromoBanner loja={loja} />
+
+  <!-- 2. Filtro Rápido de Categorias -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8 sm:my-10">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg sm:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2">
+        <span>Linhas da Serralheria Artística</span>
+      </h2>
+      <a href="/produtos" class="text-xs sm:text-sm font-bold text-blue-600 dark:text-blue-400 hover:underline">
+        Ver catálogo completo &rarr;
+      </a>
+    </div>
+    <CategoryChips baseUrl="/produtos" />
+  </section>
+
+  <!-- 3. Vitrine de Obras em Promoção / Condições Especiais -->
+  {produtosEmPromocao.length > 0 && (
+    <section class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6 sm:mb-8">
+        <div>
+          <span class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-black uppercase tracking-wider text-blue-700 dark:text-blue-300 bg-blue-100/80 dark:bg-blue-950/70 border border-blue-300 dark:border-blue-800 px-3 py-1 rounded-full">
+            ✨ Condições de Lançamento
+          </span>
+          <h2 class="text-xl sm:text-3xl font-black text-slate-900 dark:text-white mt-2">
+            Peças Selecionadas com Condições Especiais
+          </h2>
+          <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mt-1">
+            Encomende obras artesanais exclusivas com condições imperdíveis por tempo limitado.
+          </p>
+        </div>
+        <a
+          href="/produtos"
+          class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700"
+        >
+          <span>Ver todas as oportunidades &rarr;</span>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        {produtosEmPromocao.slice(0, 8).map((prod) => (
+          <ProductCard
+            slug={prod.slug}
+            nome={prod.data.nome}
+            preco={prod.data.preco}
+            precoPromocional={prod.data.precoPromocional}
+            unidade={prod.data.unidade}
+            categoria={prod.data.categoria}
+            descricao={prod.data.descricao}
+            imagem={prod.data.imagem}
+            disponivel={prod.data.disponivel}
+            destaque={prod.data.destaque}
+            whatsapp={loja.whatsapp}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- 4. Galeria Visual das Categorias de Arte em Ferro -->
+  <section class="bg-slate-100/80 dark:bg-[#0c1527] py-12 sm:py-16 my-8 border-y border-slate-200 dark:border-blue-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-bold uppercase tracking-wider text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-950/70 border border-blue-300 dark:border-blue-800 px-3.5 py-1 rounded-full">
+          Especialidades da Serralheria Artística
+        </span>
+        <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mt-3">
+          Obras Sob Medida para Qualquer Ambiente
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2">
+          Do estilo clássico colonial e rústico aos projetos industriais e arquitetura contemporânea.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        {categoriasCards.map((cat) => (
+          <a
+            href={`/produtos?categoria=${encodeURIComponent(cat.nome)}`}
+            class="group relative h-60 rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-slate-200/80 dark:border-blue-950/80 transition-all duration-300 block"
+          >
+            <img
+              src={cat.img}
+              alt={cat.nome}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>
+            <div class="absolute bottom-5 left-5 right-5 text-white">
+              <span class="text-[10px] uppercase font-bold tracking-wider text-cyan-300 mb-1 block">Especialidade</span>
+              <h3 class="font-black text-lg leading-tight group-hover:text-cyan-300 transition-colors">
+                {cat.nome}
+              </h3>
+              <p class="text-xs text-slate-300 line-clamp-1 mt-1 font-medium">
+                {cat.desc}
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Obras em Destaque Geral -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-wider text-blue-700 dark:text-blue-400">Artesanato de Excelência</span>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+          Destaques em Peças Sob Medida
+        </h2>
+      </div>
+      <a
+        href="/produtos"
+        class="text-sm font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700"
+      >
+        Ver catálogo completo &rarr;
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+      {produtosDestaque.map((prod) => (
+        <ProductCard
+          slug={prod.slug}
+          nome={prod.data.nome}
+          preco={prod.data.preco}
+          precoPromocional={prod.data.precoPromocional}
+          unidade={prod.data.unidade}
+          categoria={prod.data.categoria}
+          descricao={prod.data.descricao}
+          imagem={prod.data.imagem}
+          disponivel={prod.data.disponivel}
+          destaque={prod.data.destaque}
+          whatsapp={loja.whatsapp}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- 6. Processo de Criação da Oficina (4 Etapas Interativas em Tons de Azul) -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-xs uppercase font-extrabold tracking-wider text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-950/70 border border-blue-300 dark:border-blue-800 px-3.5 py-1.5 rounded-full inline-block mb-3">
+        Como Trabalhamos
+      </span>
+      <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white">
+        Do Esboço à Peça Finalizada na Oficina
+      </h2>
+      <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2">
+        Acompanhe como transformamos a sua ideia ou projeto arquitetônico em uma obra de ferro com acabamento impecável.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="p-6 rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-blue-950 shadow-card hover:border-blue-500/50 transition">
+        <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 font-black text-lg flex items-center justify-center mb-4">
+          01
+        </div>
+        <h3 class="font-bold text-base text-slate-900 dark:text-white mb-2">Consulta & Medição</h3>
+        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+          Entendemos seu espaço, estilo arquitetônico e dimensões exatas no local ou a partir de referências e fotos enviadas.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-blue-950 shadow-card hover:border-blue-500/50 transition">
+        <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 font-black text-lg flex items-center justify-center mb-4">
+          02
+        </div>
+        <h3 class="font-bold text-base text-slate-900 dark:text-white mb-2">Corte, Dobra e Soldagem MMA</h3>
+        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+          Corte de precisão com disco e esmerilhadeira, dobramento a frio e soldagem MMA com eletrodo revestido para união ultra resistente e firme de cada detalhe.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-blue-950 shadow-card hover:border-blue-500/50 transition">
+        <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 font-black text-lg flex items-center justify-center mb-4">
+          03
+        </div>
+        <h3 class="font-bold text-base text-slate-900 dark:text-white mb-2">Tratamento e Pintura Automotiva</h3>
+        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+          Lixamento detalhado, fundo primer antiferrugem e pintura com compressor profissional — acabamento de padrão automotivo uniforme e altamente durável.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-white dark:bg-[#0c1527] border border-slate-200 dark:border-blue-950 shadow-card hover:border-blue-500/50 transition">
+        <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 font-black text-lg flex items-center justify-center mb-4">
+          04
+        </div>
+        <h3 class="font-bold text-base text-slate-900 dark:text-white mb-2">Instalação & Entrega</h3>
+        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+          Instalação segura e nivelada no seu imóvel por profissionais dedicados, com limpeza final e garantia de durabilidade.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Seção Informativa: Visita à Oficina e Localização -->
+  <section class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-6 sm:py-8 mb-10 sm:mb-12 overflow-hidden">
+    <div class="bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white rounded-2xl sm:rounded-3xl p-5 sm:p-12 border border-blue-900/40 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8">
+      <div class="space-y-3 max-w-xl text-center lg:text-left">
+        <span class="inline-block text-[11px] sm:text-xs font-bold uppercase tracking-wider text-cyan-300 bg-blue-950/90 border border-blue-500/40 px-3 py-1 rounded-full">
+          Oficina & Serralheria em Dom Pedro - MA
+        </span>
+        <h2 class="text-xl sm:text-4xl font-black text-white leading-tight">
+          Venha Conhecer Nossas Peças de Perto
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-300">
+          Atendemos clientes residenciais, arquitetos, designers de interiores e construtoras em Dom Pedro e em toda a região do Maranhão.
+        </p>
+        <div class="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 pt-1 text-xs font-medium text-blue-200">
+          <span class="bg-slate-900/80 px-2.5 py-1.5 rounded-lg border border-blue-900/60">
+            📍 Dom Pedro, Maranhão
+          </span>
+          <span class="bg-slate-900/80 px-2.5 py-1.5 rounded-lg border border-blue-900/60">
+            📞 {loja.telefone}
+          </span>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-2.5 sm:gap-3 w-full lg:w-auto">
+        <a
+          href="/localizacao"
+          class="text-center px-5 py-3.5 sm:px-6 sm:py-4 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm shadow transition border border-blue-800/60"
+        >
+          Ver Rota no Google Maps
+        </a>
+        <a
+          href={`https://wa.me/${loja.whatsapp}?text=${encodeURIComponent('Olá! Gostaria de solicitar um orçamento na Metal DP.')}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-center px-5 py-3.5 sm:px-6 sm:py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs sm:text-sm shadow-lg shadow-blue-600/30 transition hover:scale-105"
+        >
+          Solicitar Orçamento no WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

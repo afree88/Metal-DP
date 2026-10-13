@@ -1,0 +1,107 @@
+backend:
+  name: github
+  repo: afree88/supermerk
+  branch: main
+
+# Ativa o backend local para desenvolvimento e testes
+local_backend: true
+
+# Idioma da interface do CMS
+locale: pt
+
+# Onde as imagens serão salvas e como serão referenciadas
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  # ----------------------------------------------------
+  # 1. CATÁLOGO DE PEÇAS & OBRAS ARTÍSTICAS
+  # ----------------------------------------------------
+  - name: "produtos"
+    label: "⚒️ Peças da Serralheria"
+    label_singular: "Peça / Obra"
+    folder: "src/content/produtos"
+    create: true
+    slug: "{{slug}}"
+    format: "frontmatter"
+    editor:
+      preview: true
+    summary: "{{nome}} - R$ {{preco}} ({{categoria}})"
+    view_filters:
+      - label: "⭐ Destaques"
+        field: "destaque"
+        pattern: true
+      - label: "✅ Disponíveis"
+        field: "disponivel"
+        pattern: true
+    fields:
+      - { label: "Nome da Peça", name: "nome", widget: "string" }
+      - { label: "Preço de Referência (R$)", name: "preco", widget: "number", value_type: "float", step: 0.01 }
+      - { label: "Preço Promocional (Opcional - R$)", name: "precoPromocional", widget: "number", value_type: "float", step: 0.01, required: false }
+      - { label: "Unidade de Medida", name: "unidade", widget: "select", default: "peça", options: ["peça", "metro linear", "m² sob medida", "conjunto", "unidade"] }
+      - { label: "Categoria da Peça", name: "categoria", widget: "select", options: [
+          "Portões e Grades",
+          "Guarda-Corpos e Corrimãos",
+          "Móveis e Mesas",
+          "Luminárias e Arandelas",
+          "Esculturas e Painéis",
+          "Pergolados e Gazebos",
+          "Adegas e Suportes"
+        ] }
+      - { label: "Descrição Curta", name: "descricao", widget: "text" }
+      - { label: "Foto da Peça", name: "imagem", widget: "image" }
+      - { label: "Disponível para Encomenda / Pronta Entrega?", name: "disponivel", widget: "boolean", default: true }
+      - { label: "Destacar na Página Inicial?", name: "destaque", widget: "boolean", default: false }
+      - { label: "Detalhes Técnicos, Acabamento e Medidas", name: "body", widget: "markdown", required: false }
+
+  # ----------------------------------------------------
+  # 2. CONFIGURAÇÕES DA SERRALHERIA & MEIOS DE PAGAMENTO
+  # ----------------------------------------------------
+  - name: "configuracoes"
+    label: "⚙️ Configurações & Pagamentos"
+    files:
+      - label: "Dados da Serralheria & Meios de Pagamento"
+        name: "loja"
+        file: "src/content/configuracoes/loja.json"
+        fields:
+          # Informações Gerais
+          - { label: "Nome da Serralheria", name: "nomeLoja", widget: "string", default: "Forja & Arte" }
+          - { label: "Slogan / Frase", name: "slogan", widget: "string", default: "Transformando o ferro bruto em arte, sofisticação e máxima segurança sob medida." }
+          - { label: "Telefone de Contato", name: "telefone", widget: "string", default: "(99) 9175-6968" }
+          - { label: "WhatsApp para Orçamentos (números)", name: "whatsapp", widget: "string", default: "559991756968" }
+          - { label: "Endereço", name: "endereco", widget: "string", default: "Dom Pedro - MA" }
+          - { label: "Cidade, Bairro e CEP", name: "cidadeBairro", widget: "string", default: "Dom Pedro, MA - CEP 65765-000" }
+          - { label: "Link do Google Maps para Rotas", name: "googleMapsUrl", widget: "string", default: "https://maps.app.goo.gl/23J3PhaQqDWC6AuA9" }
+          - { label: "Código Embed do Google Maps (URL)", name: "googleMapsEmbed", widget: "string", default: "https://maps.google.com/maps?q=-5.024754,-44.439429&hl=pt-BR&z=16&output=embed" }
+          - { label: "Horário Seg a Sex", name: "horarioSemana", widget: "string", default: "Segunda a Sexta: 07h30 às 18h00 | Sábado: 08h00 às 12h00" }
+          - { label: "Horário Sábados e Domingos", name: "horarioDomingo", widget: "string", default: "Orçamentos e projetos online pelo WhatsApp" }
+          - { label: "Aviso Especial no Topo", name: "bannerAviso", widget: "string", required: false, default: "⚒️ Peças sob medida, solda reforçada e pintura com compressor profissional!" }
+          - { label: "Título do Banner Principal", name: "bannerTitulo", widget: "string", default: "A Nobreza do Ferro Moldada com Arte e Maestria" }
+          - { label: "Subtítulo do Banner Principal", name: "bannerSubtitulo", widget: "string", default: "Portões, corrimãos, móveis em ferro e madeira, grades e peças decorativas com pintura automotiva no compressor." }
+
+          # ----------------------------------------------------
+          # MEIOS DE PAGAMENTO ACEITOS (EDITÁVEIS)
+          # ----------------------------------------------------
+          - label: "--- CONFIGURAÇÃO DE PAGAMENTOS ---"
+            name: "divisor_pagamento"
+            widget: "hidden"
+            default: "---"
+
+          # 1. PIX
+          - { label: "✅ Aceitar Pagamento via PIX?", name: "aceitaPix", widget: "boolean", default: true }
+          - { label: "Chave PIX da Serralheria", name: "chavePix", widget: "string", default: "559991756968" }
+          - { label: "Tipo da Chave PIX (ex: Celular, CNPJ, E-mail)", name: "tipoChavePix", widget: "string", default: "Celular / WhatsApp" }
+          - { label: "Nome do Titular do PIX", name: "titularPix", widget: "string", default: "Forja & Arte Serralheria Artística" }
+
+          # 2. DINHEIRO EM ESPÉCIE
+          - { label: "✅ Aceitar Pagamento em Dinheiro?", name: "aceitaDinheiro", widget: "boolean", default: true }
+          - { label: "Observação do Dinheiro", name: "obsDinheiro", widget: "string", default: "Dinheiro em espécie à vista (na entrega ou retirada)" }
+
+          # 3. CARTÃO (DESATIVADO NO MOMENTO)
+          - { label: "💳 Aceitar Cartão de Débito/Crédito?", name: "aceitaCartao", widget: "boolean", default: false }
+          - { label: "Observação do Cartão", name: "obsCartao", widget: "string", required: false, default: "Cartão no momento não disponível" }
+
+          # 4. BITCOIN VIA LIGHTNING NETWORK
+          - { label: "⚡ Aceitar Bitcoin via Lightning Network (BTC)?", name: "aceitaBitcoinLightning", widget: "boolean", default: true }
+          - { label: "Endereço Lightning (ex: usuario@walletofsatoshi.com ou LNURL)", name: "enderecoLightning", widget: "string", default: "talison@walletofsatoshi.com" }
+          - { label: "Observação do Bitcoin Lightning", name: "obsBitcoinLightning", widget: "string", required: false, default: "⚡ Pagamento instantâneo em satoshis via Lightning Network (BTC)" }

@@ -1,0 +1,42 @@
+---
+interface Props {
+  activeCategory?: string;
+  baseUrl?: string;
+}
+
+const { activeCategory = '', baseUrl = '/produtos' } = Astro.props;
+
+const categorias = [
+  { name: 'Todas', icon: '⚒️', count: 12 },
+  { name: 'Portões e Grades', icon: '🏰', count: 2 },
+  { name: 'Guarda-Corpos e Corrimãos', icon: '🏛️', count: 2 },
+  { name: 'Móveis e Mesas', icon: '🪵', count: 2 },
+  { name: 'Luminárias e Arandelas', icon: '💡', count: 2 },
+  { name: 'Esculturas e Painéis', icon: '⚜️', count: 2 },
+  { name: 'Pergolados e Gazebos', icon: '🌿', count: 1 },
+  { name: 'Adegas e Suportes', icon: '🍷', count: 1 },
+];
+---
+
+<div class="w-full max-w-full overflow-hidden">
+  <div class="flex items-center gap-2 overflow-x-auto pb-2.5 pt-1 scrollbar-none no-scrollbar max-w-full -mx-1 px-1">
+    {categorias.map((cat) => {
+      const isSelected = (!activeCategory && cat.name === 'Todas') || activeCategory === cat.name;
+      const targetHref = cat.name === 'Todas' ? baseUrl : `${baseUrl}?categoria=${encodeURIComponent(cat.name)}`;
+      
+      return (
+        <a
+          href={targetHref}
+          class={`shrink-0 inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 border shadow-sm ${
+            isSelected
+              ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-blue-500 shadow-blue-500/30 shadow-md'
+              : 'bg-white dark:bg-[#0c1527] text-slate-700 dark:text-slate-200 border-slate-200 dark:border-blue-950 hover:border-blue-500 hover:bg-slate-50 dark:hover:bg-slate-800/80'
+          }`}
+        >
+          <span class="text-sm sm:text-base">{cat.icon}</span>
+          <span class="whitespace-nowrap">{cat.name}</span>
+        </a>
+      );
+    })}
+  </div>
+</div>
