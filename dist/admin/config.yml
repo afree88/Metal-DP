@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: afree88/supermerk
+  repo: afree88/Metal-DP
   branch: main
 
 # Ativa o backend local para desenvolvimento e testes
@@ -65,8 +65,8 @@ collections:
         file: "src/content/configuracoes/loja.json"
         fields:
           # Informações Gerais
-          - { label: "Nome da Serralheria", name: "nomeLoja", widget: "string", default: "Forja & Arte" }
-          - { label: "Slogan / Frase", name: "slogan", widget: "string", default: "Transformando o ferro bruto em arte, sofisticação e máxima segurança sob medida." }
+          - { label: "Nome da Serralheria", name: "nomeLoja", widget: "string", default: "Metal DP" }
+          - { label: "Slogan / Frase", name: "slogan", widget: "string", default: "Serralheria artística sob medida em Dom Pedro - MA. Solda MMA reforçada, acabamento automotivo a compressor e máxima durabilidade." }
           - { label: "Telefone de Contato", name: "telefone", widget: "string", default: "(99) 9175-6968" }
           - { label: "WhatsApp para Orçamentos (números)", name: "whatsapp", widget: "string", default: "559991756968" }
           - { label: "Endereço", name: "endereco", widget: "string", default: "Dom Pedro - MA" }
@@ -75,9 +75,9 @@ collections:
           - { label: "Código Embed do Google Maps (URL)", name: "googleMapsEmbed", widget: "string", default: "https://maps.google.com/maps?q=-5.024754,-44.439429&hl=pt-BR&z=16&output=embed" }
           - { label: "Horário Seg a Sex", name: "horarioSemana", widget: "string", default: "Segunda a Sexta: 07h30 às 18h00 | Sábado: 08h00 às 12h00" }
           - { label: "Horário Sábados e Domingos", name: "horarioDomingo", widget: "string", default: "Orçamentos e projetos online pelo WhatsApp" }
-          - { label: "Aviso Especial no Topo", name: "bannerAviso", widget: "string", required: false, default: "⚒️ Peças sob medida, solda reforçada e pintura com compressor profissional!" }
-          - { label: "Título do Banner Principal", name: "bannerTitulo", widget: "string", default: "A Nobreza do Ferro Moldada com Arte e Maestria" }
-          - { label: "Subtítulo do Banner Principal", name: "bannerSubtitulo", widget: "string", default: "Portões, corrimãos, móveis em ferro e madeira, grades e peças decorativas com pintura automotiva no compressor." }
+          - { label: "Aviso Especial no Topo", name: "bannerAviso", widget: "string", required: false, default: "⚒️ Metal DP • Serralheria sob medida, solda MMA e pintura no compressor!" }
+          - { label: "Título do Banner Principal", name: "bannerTitulo", widget: "string", default: "Serralheria Artística com Força, Elegância e Precisão" }
+          - { label: "Subtítulo do Banner Principal", name: "bannerSubtitulo", widget: "string", default: "Portões, corrimãos, móveis industriais e estruturas sob medida com solda MMA reforçada e pintura automotiva no compressor." }
 
           # ----------------------------------------------------
           # MEIOS DE PAGAMENTO ACEITOS (EDITÁVEIS)
@@ -91,7 +91,7 @@ collections:
           - { label: "✅ Aceitar Pagamento via PIX?", name: "aceitaPix", widget: "boolean", default: true }
           - { label: "Chave PIX da Serralheria", name: "chavePix", widget: "string", default: "559991756968" }
           - { label: "Tipo da Chave PIX (ex: Celular, CNPJ, E-mail)", name: "tipoChavePix", widget: "string", default: "Celular / WhatsApp" }
-          - { label: "Nome do Titular do PIX", name: "titularPix", widget: "string", default: "Forja & Arte Serralheria Artística" }
+          - { label: "Nome do Titular do PIX", name: "titularPix", widget: "string", default: "Metal DP Serralheria Artística" }
 
           # 2. DINHEIRO EM ESPÉCIE
           - { label: "✅ Aceitar Pagamento em Dinheiro?", name: "aceitaDinheiro", widget: "boolean", default: true }
