@@ -1,105 +1,106 @@
-# 🛒 Mercado Bom Preço - Site Institucional & Catálogo com Sveltia CMS
+# ⚒️ Metal DP — Site Institucional & Catálogo de Peças com Sveltia CMS
 
-Site completo, moderno e rápido para supermercados de bairro, desenvolvido com **Astro**, estilizado com **Tailwind CSS** e gerenciado pelo **Sveltia CMS** (Git-based, 100% gratuito e sem custos de servidor).
+> **Serralheria artística sob medida em Dom Pedro - MA.**  
+> Portões, corrimãos, pergolados, móveis industriais e estruturas metálicas com solda MMA reforçada e pintura automotiva a compressor.
 
 ---
 
 ## 🌟 Recursos Principais
 
-- ⚡ **Desempenho Extremo com Astro**: Páginas estáticas ultrarrápidas, otimizadas para carregamento instantâneo no celular até em 3G/4G.
-- 📱 **Mobile-First & Responsivo**: Visual adaptado para celulares, tablets e computadores.
-- 🛍️ **Catálogo Dinâmico de Produtos**:
-  - Busca por nome em tempo real (digite e filtre instantaneamente).
-  - Filtro por 8 categorias principais (Frutas e Verduras, Carnes e Aves, Laticínios, Mercearia, Limpeza, Bebidas, Padaria, Higiene).
-  - Ordenação por menor preço, maior preço, ordem alfabética e ofertas.
-  - Badges automáticos de porcentagem de desconto (`% OFF`), Destaque e Esgotado.
-- 💬 **Integração Direta com WhatsApp**: Cada card e página de produto possui botão para pedir diretamente no WhatsApp da loja com mensagem pré-formatada.
-- 🗺️ **Página de Localização**: Mapa interativo do Google Maps embutido, vagas de estacionamento e horários.
-- 📝 **Formulário de Contato com Netlify Forms**: 100% gratuito, sem precisar de banco de dados ou backend em PHP/Node.
-- 🎛️ **Painel Administrativo Simples (Sveltia CMS)**:
-  - O dono do mercado adiciona/remove produtos, troca preços e sobe fotos pelo navegador em `/admin`.
-  - Nenhuma necessidade de saber programação.
+- ⚡ **Desempenho Extremo com Astro** — Páginas estáticas ultrarrápidas, carregamento instantâneo até em 3G/4G.
+- 📱 **Mobile-First** — Foco total em celular, pois é o principal meio de acesso dos clientes.
+- 🛒 **Lista de Orçamento (Carrinho)** — Cliente monta sua lista de peças e envia direto no WhatsApp com preço estimado.
+- 💬 **WhatsApp em destaque** — Botão flutuante com contagem de itens e mensagem pré-formatada com os produtos selecionados.
+- 📐 **Catálogo de Peças sob Medida** — Cards com filtro por categoria, busca em tempo real e ordenação.
+- 💳 **Meios de pagamento configuráveis no painel** — PIX, Dinheiro e Bitcoin Lightning Network (BTC).
+- 🗺️ **Página de Localização** — Mapa Google Maps embutido, horários e endereço.
+- 📬 **Formulário de Contato** — Integrado com Netlify Forms (sem backend).
+- 🎛️ **Painel Admin (Sveltia CMS)** — O dono gerencia produtos, preços e fotos pelo navegador em `/admin`, sem precisar saber programação.
 
 ---
 
-## 🚀 Como Colocar no Ar (Passo a Passo 100% Grátis)
+## 📦 Tecnologias Utilizadas
 
-### Passo 1: Subir o Projeto para o GitHub
-
-1. No terminal da sua máquina, dentro da pasta do projeto, inicialize o Git:
-   ```bash
-   git init
-   git add .
-   git commit -m "feat: site inicial do Mercado Bom Preço com Sveltia CMS"
-   ```
-
-2. Crie um repositório no seu [GitHub](https://github.com/new) (pode ser público ou privado).
-
-3. Conecte o repositório local e envie os arquivos:
-   ```bash
-   git branch -M main
-   git remote add origin https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git
-   git push -u origin main
-   ```
+| Tecnologia | Finalidade |
+|---|---|
+| [Astro](https://astro.build) | Framework de geração de site estático |
+| [Tailwind CSS](https://tailwindcss.com) | Estilização utility-first |
+| [Sveltia CMS](https://github.com/sveltia/sveltia-cms) | Painel admin baseado em Git (grátis) |
+| [Netlify](https://www.netlify.com) | Hospedagem, deploy automático e Identity |
+| [Netlify Forms](https://www.netlify.com/products/forms/) | Formulário de contato sem backend |
+| [Netlify Identity](https://docs.netlify.com/security/secure-access-to-sites/identity/) | Login seguro para o painel admin |
 
 ---
 
-### Passo 2: Conectar no Netlify (Hospedagem Gratuita)
+## 🚀 Como Colocar no Ar (100% Grátis)
 
-1. Acesse [Netlify](https://www.netlify.com) e crie uma conta gratuita (ou faça login com o GitHub).
-2. Clique em **"Add new site"** &rarr; **"Import an existing project"**.
-3. Selecione **GitHub** e escolha o repositório que você acabou de subir.
-4. O Netlify detectará as configurações automaticamente graças ao arquivo `netlify.toml` já incluído:
-   - **Build command**: `npm run build`
-   - **Publish directory**: `dist`
-5. Clique em **"Deploy site"**. Em menos de 2 minutos seu site estará no ar com HTTPS gratuito!
-
----
-
-### Passo 3: Ativar o Sveltia CMS (Acesso do Dono sem GitHub)
-
-Para que o dono do mercado faça login em `seusite.netlify.app/admin` apenas com **e-mail e senha** (sem precisar de conta no GitHub):
-
-1. No painel do seu site no Netlify, vá em:
-   - **Site configuration** &rarr; **Identity** &rarr; Clique em **"Enable Identity"**.
-2. Na aba **Registration preferences**, mantenha como **"Open"** ou **"Invite only"** (recomendado convidar o dono da loja).
-3. Role até a seção **Services** &rarr; **Git Gateway** e clique em **"Enable Git Gateway"** (isso permite que o Netlify faça alterações no seu GitHub em nome do dono do mercado).
-4. Em **Identity**, clique em **"Invite users"** e envie um convite para o e-mail do dono do mercado.
-5. O dono receberá um e-mail com link para definir sua senha de acesso.
-
----
-
-### Passo 4: Como o Dono Adiciona Produtos e Altera Preços
-
-1. O dono acessa pelo navegador:
-   ```text
-   https://seusite.netlify.app/admin
-   ```
-2. Faz o login com seu e-mail e senha.
-3. No menu lateral, clica em **"Produtos"**:
-   - Para **alterar um preço**: clica no produto existente, digita o novo valor no campo *Preço Regular* ou *Preço Promocional* e clica em **"Salvar" (Save)**.
-   - Para **adicionar um novo produto**: clica no botão **"Novo Produto" (New Produto)**, preenche o Nome, Categoria, Preço, sobe a foto do celular/computador e clica em **"Salvar"**.
-4. Assim que salvar, o site atualizará automaticamente na internet em instantes!
-
----
-
-## 💻 Testando Localmente na Sua Máquina
-
-Para rodar e visualizar o site no seu computador:
+### Passo 1 — Subir para o GitHub
 
 ```bash
-# 1. Instalar as dependências (já instaladas)
-npm install
-
-# 2. Iniciar o servidor de desenvolvimento
-npm run dev
-
-# 3. Acesse no navegador:
-# http://localhost:4321
+git init
+git add .
+git commit -m "feat: site Metal DP serralheria artística"
+git branch -M main
+git remote add origin https://github.com/SEU_USUARIO/Metal-DP.git
+git push -u origin main
 ```
 
-Para testar o build estático:
+---
+
+### Passo 2 — Conectar no Netlify
+
+1. Acesse [netlify.com](https://www.netlify.com) e faça login com o GitHub.
+2. Clique em **"Add new site"** → **"Import an existing project"**.
+3. Selecione o repositório **Metal-DP**.
+4. O Netlify detecta as configurações automaticamente via `netlify.toml`:
+   - **Build command:** `npm run build`
+   - **Publish directory:** `dist`
+5. Clique em **"Deploy site"**. Em menos de 2 minutos o site estará no ar com HTTPS gratuito!
+
+---
+
+### Passo 3 — Ativar o Painel Admin (Sveltia CMS)
+
+Para que o dono acesse `/admin` com e-mail e senha (sem conta no GitHub):
+
+1. No painel do site no Netlify → **Site configuration** → **Identity** → **"Enable Identity"**.
+2. Em **Registration preferences**, escolha **"Invite only"** (recomendado).
+3. Role até **Services** → **Git Gateway** → clique em **"Enable Git Gateway"**.
+4. Em **Identity** → **"Invite users"** → envie convite para o e-mail do dono.
+5. O dono recebe um e-mail para definir a senha e já pode acessar o painel.
+
+**URL do painel:**
+```
+https://seusite.netlify.app/admin
+```
+
+---
+
+### Passo 4 — Como Gerenciar Produtos pelo Painel
+
+1. Acesse `https://seusite.netlify.app/admin` e faça login.
+2. No menu lateral, clique em **"Produtos"**:
+   - **Alterar preço:** clique no produto, edite o campo *Preço* e clique em **Salvar**.
+   - **Novo produto:** clique em **"Novo Produto"**, preencha nome, categoria, descrição, preço, suba a foto e clique em **Salvar**.
+3. O site atualiza automaticamente em instantes (Netlify faz o deploy automático a cada commit).
+
+> 💡 Para alterar **dados da loja** (WhatsApp, PIX, horários, meios de pagamento), acesse **"Configurações da Loja"** no painel.
+
+---
+
+## 💻 Rodar Localmente
+
 ```bash
+# Instalar dependências
+npm install
+
+# Iniciar servidor de desenvolvimento
+npm run dev
+# Acesse: http://localhost:4321
+```
+
+```bash
+# Testar o build de produção
 npm run build
 npm run preview
 ```
@@ -108,21 +109,68 @@ npm run preview
 
 ## 📁 Estrutura de Arquivos
 
-```text
+```
+Metal-DP/
 ├── public/
 │   ├── admin/
-│   │   ├── index.html        <- Sveltia CMS
-│   │   └── config.yml        <- Configuração das coleções do CMS
-│   ├── images/uploads/       <- Fotos enviadas pelo dono
-│   └── favicon.svg           <- Ícone do site
+│   │   ├── index.html          ← Sveltia CMS (painel admin)
+│   │   └── config.yml          ← Configuração das coleções do CMS
+│   └── favicon.svg
 ├── src/
 │   ├── content/
-│   │   ├── config.ts         <- Schemas de validação Zod
-│   │   ├── produtos/*.md     <- Arquivos de produtos gerenciados pelo CMS
-│   │   └── configuracoes/    <- Informações da loja e horários
-│   ├── components/           <- Header, Footer, Cards, Banners e Formulários
-│   ├── layouts/              <- BaseLayout com SEO e Tailwind
-│   └── pages/                <- Início, Catálogo, Detalhes, Sobre, Contato, Localização
-├── astro.config.mjs          <- Configuração do Astro com Tailwind
-└── netlify.toml              <- Configuração de deploy do Netlify
+│   │   ├── config.ts           ← Schemas Zod de validação
+│   │   ├── configuracoes/
+│   │   │   └── loja.json       ← Dados da loja (nome, WhatsApp, PIX, horários...)
+│   │   └── produtos/           ← Arquivos .md de cada peça (gerenciados pelo CMS)
+│   ├── components/
+│   │   ├── CartDrawer.astro    ← Gaveta de orçamento com tabs de pagamento
+│   │   ├── CategoryChips.astro ← Filtro por categoria
+│   │   ├── Footer.astro        ← Rodapé com pagamentos e contato
+│   │   ├── Header.astro        ← Navegação, logo e modo escuro
+│   │   ├── NetlifyForm.astro   ← Formulário de contato
+│   │   ├── ProductCard.astro   ← Card de peça/produto
+│   │   └── PromoBanner.astro   ← Banner de destaque/hero
+│   ├── layouts/
+│   │   └── BaseLayout.astro    ← Layout base com SEO e botões flutuantes
+│   ├── pages/
+│   │   ├── index.astro         ← Página inicial (hero + catálogo)
+│   │   ├── sobre.astro         ← Sobre a serralheria
+│   │   ├── contato.astro       ← Formulário de contato
+│   │   ├── localizacao.astro   ← Mapa e horários
+│   │   └── produtos/           ← Páginas individuais de cada peça
+│   └── styles/
+├── astro.config.mjs            ← Configuração do Astro com Tailwind
+├── tailwind.config.mjs         ← Configuração do Tailwind
+├── netlify.toml                ← Configuração de build e deploy
+└── package.json
 ```
+
+---
+
+## 💳 Meios de Pagamento Suportados
+
+| Método | Status |
+|---|---|
+| 💠 PIX | ✅ Ativo |
+| 💵 Dinheiro | ✅ Ativo |
+| ⚡ Bitcoin Lightning Network (BTC) | ✅ Ativo |
+| 💳 Cartão | ❌ Não disponível no momento |
+
+> Os meios de pagamento podem ser ativados/desativados em `src/content/configuracoes/loja.json` ou pelo painel admin.
+
+---
+
+## 📞 Contato da Serralheria
+
+- 📍 **Localização:** Dom Pedro - MA (CEP 65765-000)
+- 📱 **WhatsApp:** [(99) 9175-6968](https://wa.me/559991756968)
+- 🕐 **Segunda a Sexta:** 07h30 às 18h00
+- 🕐 **Sábado:** 08h00 às 12h00
+- 🌐 **Online (orçamentos):** Qualquer horário pelo WhatsApp
+
+---
+
+## 📝 Licença
+
+Projeto desenvolvido para uso exclusivo da **Metal DP Serralheria Artística**.  
+Todos os direitos reservados © 2025 Metal DP.
