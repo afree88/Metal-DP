@@ -12,15 +12,16 @@
   "bannerAviso": "⚒️ Metal DP • Serralheria sob medida, solda MMA e pintura no compressor!",
   "bannerTitulo": "Serralheria Artística com Força, Elegância e Precisão",
   "bannerSubtitulo": "Portões, corrimãos, móveis industriais e estruturas sob medida com solda MMA reforçada e pintura automotiva no compressor.",
+  "divisor_pagamento": "---",
   "aceitaPix": true,
   "chavePix": "559991756968",
   "tipoChavePix": "Celular / WhatsApp",
-  "titularPix": "Metal DP Serralheria Artística",
+  "titularPix": "Talison lima sousa",
   "aceitaDinheiro": true,
   "obsDinheiro": "Dinheiro em espécie à vista (na entrega ou retirada)",
   "aceitaCartao": false,
   "obsCartao": "Cartão no momento não disponível",
-  "aceitaBitcoinLightning": true,
+  "aceitaBitcoinLightning": false,
   "enderecoLightning": "talison@walletofsatoshi.com",
   "obsBitcoinLightning": "⚡ Bitcoin instantâneo via Lightning Network (BTC)"
 }
